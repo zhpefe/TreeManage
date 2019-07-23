@@ -1,6 +1,6 @@
 <?php
 
-namespace Encore\NewTree\Http\Controllers;
+namespace Encore\TreeManage\Http\Controllers;
 
 use Encore\Admin\Controllers\MenuController;
 use Encore\Admin\Form;
