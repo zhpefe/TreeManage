@@ -1,7 +1,6 @@
 laravel-admin extension
 ======
-这个就是继承 MenuController 的一个 Controller。作者 松 写的已经挺好了，所以 Tree 结构的Menu管理页面
-看起来挺好的。也没啥难度，自己用起来方便而已。
+这个就是继承 MenuController 的一个 Controller。作者 松 写的菜单管理界面很实用。也没啥难度，自己用起来方便而已。
 Model 需要是 Tree 数据模型树
 ```php
 calss CategoryController extends TreeManageController
