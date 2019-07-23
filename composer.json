@@ -2,7 +2,7 @@
     "name": "zhpefe/treemanage",
     "description": "TREE manage",
     "type": "library",
-    "keywords": ["laravel-admin", "treemanage",'zhpefe'],
+    "keywords": ["laravel-admin", "treemanage","zhpefe"],
     "homepage": "https://github.com/zhpefe/TreeManage",
     "license": "MIT",
     "authors": [
