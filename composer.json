@@ -1,9 +1,9 @@
 {
-    "name": "laravel-admin-ext/treemanage",
-    "description": "description...",
+    "name": "zhpefe/treemanage",
+    "description": "TREE manage",
     "type": "library",
-    "keywords": ["laravel-admin", "extension"],
-    "homepage": "https://github.com/laravel-admin-ext/treemanage",
+    "keywords": ["laravel-admin", "treemanage",'zhpefe'],
+    "homepage": "https://github.com/zhpefe/TreeManage",
     "license": "MIT",
     "authors": [
         {
