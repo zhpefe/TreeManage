@@ -13,16 +13,17 @@ use Illuminate\Routing\Controller;
 
 class TreeManageController extends MenuController
 {
-    public $model = null;
-    public $title = '';
-    public $description = '';
-    public $route = '';
+    protected $model = null;
+    protected $title = '';
+    protected $description = '';
+    protected $route = '';
 
     public function index(Content $content)
     {
         if (!$this->model) {
             return $content->body('错误的Model');
         }
+
         return $content
             ->title($this->title)
             ->description($this->description)
@@ -34,7 +35,7 @@ class TreeManageController extends MenuController
                     $form = $this->setEditForm($form);
                     $form->action(admin_base_path($this->route));
                     $form->hidden('_token')->default(csrf_token());
-                    $column->append((new Box('新增', $form))->style('success'));
+                    $column->append((new Box(trans('admin.new'), $form))->style('success'));
                 });
             });
     }
@@ -48,7 +49,7 @@ class TreeManageController extends MenuController
      */
     public function show($id)
     {
-        return redirect(admin_base_path($route) . "/{$id}/edit");
+        return redirect(admin_base_path($this->route) . "/{$id}/edit");
     }
 
     /**
@@ -56,14 +57,22 @@ class TreeManageController extends MenuController
      */
     protected function treeView()
     {
-        $menuModel = $this->model;
-
-        return $menuModel::tree(function (Tree $tree) {
-            $tree->disableCreate();
-            $tree->branch(function ($branch) {
-                return $this->setTreeStr($branch);
-            });
+        $model = $this->model;
+        $tree = new Tree(new $model());
+        $tree->disableCreate();
+        $tree->branch(function ($branch) {
+            $payload = $this->setTreeStr($branch);
+            if (!isset($branch['children'])) {
+                if (url()->isValidUrl($branch['uri'])) {
+                    $uri = $branch['uri'];
+                } else {
+                    $uri = admin_url($branch['uri']);
+                }
+                $payload .= "&nbsp;&nbsp;&nbsp;<a href=\"$uri\" class=\"dd-nodrag\">$uri</a>";
+            }
+            return $payload;
         });
+        return $tree;
     }
 
     /**
@@ -78,7 +87,7 @@ class TreeManageController extends MenuController
     {
         return $content
             ->title($this->title)
-            ->description('编辑 ' . $this->description)
+            ->description(trans('admin.edit'))
             ->row($this->form()->edit($id));
     }
 
@@ -99,8 +108,8 @@ class TreeManageController extends MenuController
 
     public function setForm($form)
     {
-        $form->select('parent_id','父类')->options($this->model::selectOptions());
-        $form->text('title', '名称')->rules('required');
+        $form->select('parent_id',__('parent_id'))->options($this->model::selectOptions());
+        $form->text('title', __('title'))->rules('required');
         return $form;
     }
     public function setEditForm($form)

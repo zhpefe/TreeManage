@@ -1,5 +1,6 @@
 laravel-admin extension
 ======
+### laravel-admin 1.8.1
 安装
 ```php
 composer require zhpefe/treemanage
@@ -8,10 +9,10 @@ composer require zhpefe/treemanage
 Model 需要是 Tree 数据模型树
 ```php
 calss CategoryController extends TreeManageController
-    public $model = Category::class;
-    public $title = '新闻类别';
-    public $description = '新闻类别管理';
-    public $route = 'news/category';
+    protected $model = Category::class;
+    protected $title = '新闻类别';
+    protected $description = '新闻类别管理';
+    protected $route = 'news/category';
 ```
 还可以覆盖一些方法：
 ```php
