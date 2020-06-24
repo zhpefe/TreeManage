@@ -62,14 +62,6 @@ class TreeManageController extends MenuController
         $tree->disableCreate();
         $tree->branch(function ($branch) {
             $payload = $this->setTreeStr($branch);
-            if (!isset($branch['children'])) {
-                if (url()->isValidUrl($branch['uri'])) {
-                    $uri = $branch['uri'];
-                } else {
-                    $uri = admin_url($branch['uri']);
-                }
-                $payload .= "&nbsp;&nbsp;&nbsp;<a href=\"$uri\" class=\"dd-nodrag\">$uri</a>";
-            }
             return $payload;
         });
         return $tree;
