@@ -1,5 +1,9 @@
 laravel-admin extension
 ======
+安装
+```php
+composer require zhpefe/treemanage
+```
 这个就是继承 MenuController 的一个 Controller。作者 松 写的菜单管理界面很实用。也没啥难度，自己用起来方便而已。
 Model 需要是 Tree 数据模型树
 ```php
