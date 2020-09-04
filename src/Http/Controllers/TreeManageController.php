@@ -17,6 +17,7 @@ class TreeManageController extends MenuController
     protected $title = '';
     protected $description = '';
     protected $route = '';
+    protected $where = null;
 
     public function index(Content $content)
     {
@@ -60,6 +61,9 @@ class TreeManageController extends MenuController
         $model = $this->model;
         $tree = new Tree(new $model());
         $tree->disableCreate();
+        if ($this->where) {
+            return $model->where($this->where);
+        }
         $tree->branch(function ($branch) {
             $payload = $this->setTreeStr($branch);
             return $payload;
